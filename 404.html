@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>高德客资 · 上线前三项确认</title>
+  <script>
+    (function () {
+      var base = "/";
+      if (/\.github\.io$/.test(location.hostname)) {
+        var user = location.hostname.split(".")[0];
+        var seg = location.pathname.split("/").filter(Boolean)[0];
+        if (seg && seg !== user && seg.indexOf("tsk_amap_") !== 0) {
+          base = "/" + seg + "/";
+        }
+      } else {
+        var dir = location.pathname.replace(/[^/]*$/, "");
+        var cut = dir.indexOf("/tsk_amap_");
+        base = cut >= 0 ? dir.slice(0, cut + 1) : dir || "/";
+      }
+      window.__GATE_BASE = base;
+      document.write('<link rel="stylesheet" href="' + base + 'app.css">');
+    })();
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    document.write('<script src="' + window.__GATE_BASE + 'app.js"><\/script>');
+  </script>
+</body>
+</html>
